@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Press to Play Video</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background-color: black;
+            overflow: hidden;
+        }
+
+        #playButton {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid white;
+            font-size: 1.5rem;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        video {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="playButton">▶ Press to Play</button>
+
+    <video id="fullscreen-video" playsinline>
+        <source src="sunshine.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        const button = document.getElementById("playButton");
+        const video = document.getElementById("fullscreen-video");
+
+        button.addEventListener("click", () => {
+            button.style.display = "none";
+            video.style.display = "block";
+            video.volume = 1.0;
+            video.play().catch(err => {
+                alert("Unable to play video: " + err.message);
+            });
+        });
+    </script>
+</body>
+</html>
